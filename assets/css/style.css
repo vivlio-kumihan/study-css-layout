@@ -14,36 +14,81 @@ body {
 .container {
   display: grid;
   place-items: center;
-  max-width: 700px;
+  max-width: 1050px;
   height: 100vh;
   margin: 0 auto;
   background-color: #eee;
 }
 
-.grid-container {
+dl {
   display: grid;
-  /* grid-template-columns: 10rem 10rem 10rem;
-  grid-template-rows: 10rem 10rem 10rem; */
-  grid-template-columns: repeat(3, 10rem);
-  grid-template-rows: repeat(3, 10rem);
-  grid-gap: 3rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  
 }
 
-.grid-container > li {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
+.wrapper a {
+  z-index: 3;
+}
+
+.wrapper dt {
   position: relative;
-  background-color: #999;
 }
 
-.grid-container > li::before {
+/* HTMLに画像を記述してCSSで枠内位置をコントロールできる設定 */
+/* imgの包み紙 */
+.wrapper figure {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.wrapper dt::before {
   position: absolute;
   top: 0;
   left: 0;
-  width: 200px;
-  height: 200px;
-  background-color: #000000;
-  clip-path: circle(50% at 50% 50%);
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-color: rgba(50, 50, 50, 0.7);
+  z-index: 1;
+  transition: .5s;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.wrapper dt.active::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* HTMLに画像を記述してCSSで枠内位置をコントロールできる設定 */
+/* img本体 */
+.wrapper img {
+  width: 100%;
+  object-fit:cover;
+  object-position: 50% 50%;
+  transform: scale(1.2);
+  aspect-ratio: 1/1;
+}
+
+.wrapper h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-align: center;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: .25rem;
+  text-shadow: 0 0 4px #333;
+  z-index: 2;
+}
+
+.wrapper dd {
+  margin-top: 1rem;
+  text-indent: 1rem;
 }
