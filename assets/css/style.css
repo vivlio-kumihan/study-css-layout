@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-  max-width: 700px;
+  max-width: 900px;
   margin: 5rem auto;
   padding: 1rem;
   background-color: #eee;
@@ -19,14 +19,103 @@ body {
 }
 
 .wrapper {
+  max-width: calc(900px * .7 - 1rem);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 1rem;
-  background-color: red;
+  gap: 1rem;
+  background-color: #fff;
 }
 
-img {
-  display: block;
-  max-width: 100%;
+.item {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/*  背景画像のコントロール方法が解決。
+    自分がイメージしている方法はこれ。 */
+/*  横方向のコントロール　X軸の値を変更する。
+    縦方向のコントロール　Y軸の値を変更すると言いたいが、
+    object-fit: contain;では調節ができないことに留意する。 */
+.wrapper.one {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 2fr;
+}
+
+.wrapper.one > .item.square {
+  aspect-ratio: 1/1;
+}
+
+.wrapper.one img {
+  width: 100%;
+  height: 100%;
+  /* 値がcontainで縦方向だけコントロールできる。 */
+  object-fit: cover;
+  transform: scale(1);
+  /* 現状横方向は50％となっているが書いているだけで調整はできない。 */
+  object-position: 50% 50%;
+}
+
+.wrapper.one .one {
+  /* 1. 横方向のコントロールがしたいので、coverとする。 */
+  /* 2. object-fitを変更したので写真倍率が変わるのでこちらも調整する。 */
+  transform: scale(1);
+  /* 3. 横方向の調整をx軸の値でやる。 */
+  object-position: 100% 50%;
+}
+
+.wrapper.one .two {
+  /* 同じ要領でこちらも解決させる。 */
+  object-fit: cover;
+  transform: scale(1);
+  object-position: 60% 50%;
+}
+
+
+/* 画像を調整できるような気になったが使えない欠点がある。
+object-fit: contain;ではレスポンシブルな調節ができない。 */
+.wrapper.two {
+  margin: 5rem auto 0rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15rem 30rem;
+}
+
+.wrapper.two img {
+  width: 100%;
+  height: 100%;
+  /* 値がcontainで縦方向だけコントロールできる。 */
+  object-fit: contain;
+  transform: scale(1.2);
+  /* 現状横方向は50％となっているが書いているだけで調整はできない。 */
+  object-position: 50% 50%;
+}
+
+.wrapper.two .one {
+  /* 1. 横方向のコントロールがしたいので、coverとする。 */
+  object-fit: cover;
+  /* 2. object-fitを変更したので写真倍率が変わるのでこちらも調整する。 */
+  transform: scale(1.05);
+  /* 3. 横方向の調整をx軸の値でやる。 */
+  object-position: 85% 50%;
+
+}
+.wrapper.two .two {
+  /* 同じ要領でこちらも解決させる。 */
+  object-fit: cover;
+  transform: scale(1.1);
+  object-position: 100% 50%;
+}
+
+.wrapper.two .three {
+  /* 縦方向の調整がしたい。親の設定のママcontain */
+  /* 1. 写真倍率を変更する。 */
+  transform: scale(3.5);
+  /* 2. 縦方向の調整をする。 */
+  object-position: 50% 40%;
+}
+
+.wrapper.two .four {
+  /* 同じ要領でこちらも解決させる。*/
+  transform: scale(2.7);
+  object-position: 50% 55%;
 }
