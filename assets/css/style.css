@@ -12,83 +12,111 @@ body {
 }
 
 .container {
-  display: grid;
-  place-items: center;
-  max-width: 1050px;
-  height: 100vh;
-  margin: 0 auto;
+  max-width: 900px;
+  margin: 5rem auto;
+  padding: 1rem;
   background-color: #eee;
+  border-radius: .3rem;
 }
 
-dl {
+.wrapper {
+  max-width: calc(900px * .7 - 1rem);
+  margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  
+  background-color: #fff;
 }
 
-.wrapper a {
-  z-index: 3;
-}
-
-.wrapper dt {
-  position: relative;
-}
-
-/* HTMLに画像を記述してCSSで枠内位置をコントロールできる設定 */
-/* imgの包み紙 */
-.wrapper figure {
+.item {
   width: 100%;
   height: 100%;
   overflow: hidden;
 }
 
-.wrapper dt::before {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  content: "";
-  background-color: rgba(50, 50, 50, 0.7);
-  z-index: 1;
-  transition: .5s;
-  visibility: hidden;
-  opacity: 0;
+/*  背景画像のコントロール方法が解決。
+    自分がイメージしている方法はこれ。 */
+/*  横方向のコントロール　X軸の値を変更する。
+    縦方向のコントロール　Y軸の値を変更すると言いたいが、
+    object-fit: contain;では調節ができないことに留意する。 */
+.wrapper.one {
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 2fr;
 }
 
-.wrapper dt.active::before {
-  visibility: visible;
-  opacity: 1;
-}
-
-/* HTMLに画像を記述してCSSで枠内位置をコントロールできる設定 */
-/* img本体 */
-.wrapper img {
-  width: 100%;
-  object-fit:cover;
-  object-position: 50% 50%;
-  transform: scale(1.2);
+.wrapper.one > .item.square {
   aspect-ratio: 1/1;
 }
 
-.wrapper h2 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.wrapper.one img {
   width: 100%;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-align: center;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: .25rem;
-  text-shadow: 0 0 4px #333;
-  z-index: 2;
+  height: 100%;
+  /* 値がcontainで縦方向だけコントロールできる。 */
+  object-fit: cover;
+  transform: scale(1);
+  /* 現状横方向は50％となっているが書いているだけで調整はできない。 */
+  object-position: 50% 50%;
 }
 
-.wrapper dd {
-  margin-top: 1rem;
-  text-indent: 1rem;
+.wrapper.one .one {
+  /* 1. 横方向のコントロールがしたいので、coverとする。 */
+  /* 2. object-fitを変更したので写真倍率が変わるのでこちらも調整する。 */
+  transform: scale(1);
+  /* 3. 横方向の調整をx軸の値でやる。 */
+  object-position: 100% 50%;
+}
+
+.wrapper.one .two {
+  /* 同じ要領でこちらも解決させる。 */
+  object-fit: cover;
+  transform: scale(1);
+  object-position: 60% 50%;
+}
+
+
+/* 画像を調整できるような気になったが使えない欠点がある。
+object-fit: contain;ではレスポンシブルな調節ができない。 */
+.wrapper.two {
+  margin: 5rem auto 0rem;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 15rem 30rem;
+}
+
+.wrapper.two img {
+  width: 100%;
+  height: 100%;
+  /* 値がcontainで縦方向だけコントロールできる。 */
+  object-fit: contain;
+  transform: scale(1.2);
+  /* 現状横方向は50％となっているが書いているだけで調整はできない。 */
+  object-position: 50% 50%;
+}
+
+.wrapper.two .one {
+  /* 1. 横方向のコントロールがしたいので、coverとする。 */
+  object-fit: cover;
+  /* 2. object-fitを変更したので写真倍率が変わるのでこちらも調整する。 */
+  transform: scale(1.05);
+  /* 3. 横方向の調整をx軸の値でやる。 */
+  object-position: 85% 50%;
+
+}
+.wrapper.two .two {
+  /* 同じ要領でこちらも解決させる。 */
+  object-fit: cover;
+  transform: scale(1.1);
+  object-position: 100% 50%;
+}
+
+.wrapper.two .three {
+  /* 縦方向の調整がしたい。親の設定のママcontain */
+  /* 1. 写真倍率を変更する。 */
+  transform: scale(3.5);
+  /* 2. 縦方向の調整をする。 */
+  object-position: 50% 40%;
+}
+
+.wrapper.two .four {
+  /* 同じ要領でこちらも解決させる。*/
+  transform: scale(2.7);
+  object-position: 50% 55%;
 }
