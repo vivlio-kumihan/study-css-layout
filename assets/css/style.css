@@ -18,7 +18,7 @@ body {
   border-radius: .3rem;
 }
 
-/* 表組をgrid SP版 */
+/* 表組をgrid PC/SP切り替え版 */
 .table {
   display: grid;
   grid-template-columns: 20% 80%;
@@ -32,7 +32,8 @@ body {
 dl > .item {
   display: flex;
   align-items: center;
-  padding: 1rem 2rem 1rem 0;
+  padding: 1rem 2rem 1rem 1rem;
+  text-indent: -1rem;
   line-height: 1.2;
 }
 
