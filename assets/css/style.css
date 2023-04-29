@@ -12,76 +12,38 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 700px;
+  display: grid;
+  align-content: center;
+  gap: 4rem;
+  width: min(100%, 2000px);
   height: 100vh;
   margin: 0 auto;
+  padding: 0 1rem;
 }
 
-.grid-container {
+.grid-container.one {
   display: grid;
-  /*  1frにすると効果が効かなくなるので
-      縦横の値を入れる。 */
-  grid-template-rows: repeat(3, 10rem);
-  grid-template-columns: repeat(3, 10rem);
-  /*  1. align-conten, 2. justify-contentとも
-      設定に種類がある。
-      start, center, end,
-      space-around, space-evenly, space-between
-      space-betweenは使わない。 */
-  /* align-content: space-evenly;
-      justify-content: space-evenly; */
-  /* 1. align-content, 2. justify-contentのショートハンド */
-  /* place-content: end start; */
-  place-content: center;
-  
-  /* 1. align-items, 2. justify-items */
-  /* start, center, end, stretch */
-  /* 初期値はstretch */
-  /* align-items: start;
-  justify-items: end; */
-  /* place-items: short hand start centerとか; */
-  place-items: start end;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
   gap: 1rem;
-  width: 40rem;
-  height: 40rem;
-  background-color: #eee;
+  width: 100%;
+  counter-reset: number;
+}
+
+.grid-container.two {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+  gap: 1rem;
+  width: 100%;
   counter-reset: number;
 }
 
 .grid-container > li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.5rem 2rem;
+  padding: 1rem;
   font-size: 2rem;
-  line-height: 1em;
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #fff;
-  background-color: #aaa;
+  font-weight: 799;
+  background-color: #eee;
+  border: 1px solid #ccc;
 }
-
-.grid-container > li:nth-last-of-type(1),
-.grid-container > li:nth-last-of-type(5),
-.grid-container > li:nth-last-of-type(9) {
-  background-color: #555;
-}
-
-.grid-container > li:nth-of-type(1) {
-  place-self: start end;
-}
-.grid-container > li:nth-of-type(5) {
-  place-self: stretch;
-}
-.grid-container > li:nth-of-type(9) {
-  place-self: end start;
-}
-
-/* align-self: start;
-justify-self: start; */
 
 .grid-container > li::before {
   counter-increment: number;
